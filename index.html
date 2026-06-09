@@ -258,6 +258,77 @@
 
   textarea.form-input { resize: vertical; min-height: 80px; }
 
+  /* ── Select customizado ── */
+  .custom-select { position: relative; width: 100%; }
+
+  .custom-select-trigger {
+    width: 100%;
+    background: rgba(245,240,232,0.06);
+    border: 1px solid rgba(201,169,110,0.25);
+    color: var(--areia);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    padding: 0.9rem 2.5rem 0.9rem 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color 0.2s, background 0.2s;
+    user-select: none;
+  }
+
+  .custom-select-trigger.placeholder { color: rgba(245,240,232,0.25); }
+  .custom-select-trigger.open,
+  .custom-select-trigger:hover { border-color: var(--dourado); background: rgba(245,240,232,0.08); }
+
+  .custom-select-arrow {
+    width: 10px; height: 10px;
+    border-right: 1.5px solid var(--dourado);
+    border-bottom: 1.5px solid var(--dourado);
+    transform: rotate(45deg);
+    transition: transform 0.2s;
+    margin-top: -4px;
+    flex-shrink: 0;
+  }
+
+  .custom-select-trigger.open .custom-select-arrow {
+    transform: rotate(-135deg);
+    margin-top: 4px;
+  }
+
+  .custom-select-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: #1a2e25;
+    border: 1px solid rgba(201,169,110,0.3);
+    border-top: none;
+    z-index: 100;
+    max-height: 260px;
+    overflow-y: auto;
+  }
+
+  .custom-select-dropdown.open { display: block; }
+
+  .custom-select-option {
+    padding: 0.75rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    color: rgba(245,240,232,0.7);
+    cursor: pointer;
+    transition: all 0.15s;
+    border-bottom: 1px solid rgba(201,169,110,0.06);
+  }
+
+  .custom-select-option:hover { background: rgba(201,169,110,0.1); color: var(--areia); }
+  .custom-select-option.selected { background: rgba(201,169,110,0.15); color: var(--dourado); }
+
+  /* scrollbar elegante */
+  .custom-select-dropdown::-webkit-scrollbar { width: 4px; }
+  .custom-select-dropdown::-webkit-scrollbar-track { background: transparent; }
+  .custom-select-dropdown::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.3); }
+
   /* Botão principal */
   .btn-reservar {
     width: 100%;
@@ -692,36 +763,75 @@
 
     <div class="form-section">
       <label class="form-label">Horário</label>
-      <select class="form-input" id="horario">
-        <option value="" disabled selected>Selecione um horário</option>
-        <option>11:00</option><option>11:30</option><option>12:00</option>
-        <option>12:30</option><option>13:00</option><option>13:30</option>
-        <option>14:00</option><option>14:30</option><option>15:00</option>
-        <option>15:30</option><option>16:00</option><option>16:30</option>
-        <option>17:00</option><option>17:30</option><option>18:00</option>
-        <option>18:30</option><option>19:00</option><option>19:30</option>
-        <option>20:00</option><option>20:30</option><option>21:00</option>
-        <option>21:30</option><option>22:00</option>
-      </select>
+      <div class="custom-select" id="cs-horario">
+        <div class="custom-select-trigger placeholder" onclick="toggleSelect('cs-horario')">
+          <span>Selecione um horário</span><div class="custom-select-arrow"></div>
+        </div>
+        <div class="custom-select-dropdown">
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">11:00</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">11:30</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">12:00</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">12:30</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">13:00</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">13:30</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">14:00</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">14:30</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">15:00</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">15:30</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">16:00</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">16:30</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">17:00</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">17:30</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">18:00</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">18:30</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">19:00</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">19:30</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">20:00</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">20:30</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">21:00</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">21:30</div>
+          <div class="custom-select-option" onclick="selectOption('cs-horario','horario',this)">22:00</div>
+        </div>
+        <input type="hidden" id="horario">
+      </div>
     </div>
 
     <div class="form-section">
       <label class="form-label">Ambiente</label>
-      <select class="form-input" id="ambiente">
-        <option value="" disabled selected>Selecione o ambiente</option>
-        <option value="1º Piso — Salão LED">1º Piso — Salão LED</option>
-        <option value="2º Piso — Salão Rooftop">2º Piso — Salão Rooftop</option>
-      </select>
+      <div class="custom-select" id="cs-ambiente">
+        <div class="custom-select-trigger placeholder" onclick="toggleSelect('cs-ambiente')">
+          <span>Selecione o ambiente</span><div class="custom-select-arrow"></div>
+        </div>
+        <div class="custom-select-dropdown">
+          <div class="custom-select-option" onclick="selectOption('cs-ambiente','ambiente',this)" data-value="1º Piso — Salão LED">1º Piso — Salão LED</div>
+          <div class="custom-select-option" onclick="selectOption('cs-ambiente','ambiente',this)" data-value="2º Piso — Salão Rooftop">2º Piso — Salão Rooftop</div>
+        </div>
+        <input type="hidden" id="ambiente">
+      </div>
     </div>
 
     <div class="form-section">
       <label class="form-label">Número de pessoas</label>
-      <select class="form-input" id="pessoas">
-        <option value="" disabled selected>Selecione o número de pessoas</option>
-        <option>1</option><option>2</option><option>3</option><option>4</option>
-        <option>5</option><option>6</option><option>7</option><option>8</option>
-        <option>9</option><option>10</option><option>11</option><option>12+</option>
-      </select>
+      <div class="custom-select" id="cs-pessoas">
+        <div class="custom-select-trigger placeholder" onclick="toggleSelect('cs-pessoas')">
+          <span>Selecione o número de pessoas</span><div class="custom-select-arrow"></div>
+        </div>
+        <div class="custom-select-dropdown">
+          <div class="custom-select-option" onclick="selectOption('cs-pessoas','pessoas',this)">1</div>
+          <div class="custom-select-option" onclick="selectOption('cs-pessoas','pessoas',this)">2</div>
+          <div class="custom-select-option" onclick="selectOption('cs-pessoas','pessoas',this)">3</div>
+          <div class="custom-select-option" onclick="selectOption('cs-pessoas','pessoas',this)">4</div>
+          <div class="custom-select-option" onclick="selectOption('cs-pessoas','pessoas',this)">5</div>
+          <div class="custom-select-option" onclick="selectOption('cs-pessoas','pessoas',this)">6</div>
+          <div class="custom-select-option" onclick="selectOption('cs-pessoas','pessoas',this)">7</div>
+          <div class="custom-select-option" onclick="selectOption('cs-pessoas','pessoas',this)">8</div>
+          <div class="custom-select-option" onclick="selectOption('cs-pessoas','pessoas',this)">9</div>
+          <div class="custom-select-option" onclick="selectOption('cs-pessoas','pessoas',this)">10</div>
+          <div class="custom-select-option" onclick="selectOption('cs-pessoas','pessoas',this)">11</div>
+          <div class="custom-select-option" onclick="selectOption('cs-pessoas','pessoas',this)">12+</div>
+        </div>
+        <input type="hidden" id="pessoas">
+      </div>
     </div>
 
     <div class="form-section">
@@ -798,6 +908,46 @@ let pessoasSelecionadas = null;
 let reservaIdCancelando = null;
 let todasReservas = [];
 let filtroAtual = 'todas';
+
+// ── Select Customizado ──
+function toggleSelect(id) {
+  const cs = document.getElementById(id);
+  const trigger = cs.querySelector('.custom-select-trigger');
+  const dropdown = cs.querySelector('.custom-select-dropdown');
+  const isOpen = dropdown.classList.contains('open');
+  // fechar todos
+  document.querySelectorAll('.custom-select-dropdown').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.custom-select-trigger').forEach(t => t.classList.remove('open'));
+  if (!isOpen) {
+    dropdown.classList.add('open');
+    trigger.classList.add('open');
+  }
+}
+
+function selectOption(csId, inputId, el) {
+  const cs = document.getElementById(csId);
+  const trigger = cs.querySelector('.custom-select-trigger');
+  const dropdown = cs.querySelector('.custom-select-dropdown');
+  const value = el.dataset.value || el.textContent;
+  // atualizar visual
+  cs.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  trigger.querySelector('span').textContent = el.textContent;
+  trigger.classList.remove('placeholder');
+  // fechar
+  dropdown.classList.remove('open');
+  trigger.classList.remove('open');
+  // setar valor
+  document.getElementById(inputId).value = value;
+}
+
+// fechar ao clicar fora
+document.addEventListener('click', e => {
+  if (!e.target.closest('.custom-select')) {
+    document.querySelectorAll('.custom-select-dropdown').forEach(d => d.classList.remove('open'));
+    document.querySelectorAll('.custom-select-trigger').forEach(t => t.classList.remove('open'));
+  }
+});
 
 // ── Init ──
 document.addEventListener('DOMContentLoaded', () => {
@@ -908,6 +1058,14 @@ function novaReserva() {
   document.getElementById('horario').value = '';
   document.getElementById('ambiente').value = '';
   document.getElementById('pessoas').value = '';
+  ['cs-horario','cs-ambiente','cs-pessoas'].forEach(id => {
+    const cs = document.getElementById(id);
+    cs.querySelector('.custom-select-trigger span').textContent =
+      id === 'cs-horario' ? 'Selecione um horário' :
+      id === 'cs-ambiente' ? 'Selecione o ambiente' : 'Selecione o número de pessoas';
+    cs.querySelector('.custom-select-trigger').classList.add('placeholder');
+    cs.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+  });
   document.getElementById('btn-reservar').disabled = false;
   document.getElementById('btn-reservar').textContent = 'Solicitar reserva';
 }
